@@ -178,8 +178,8 @@ export default function Header() {
           {/* Desktop Actions Group */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="tel:+1234567890"
-              aria-label="Call us at +1 234 567 890"
+              href="tel:089 25 74 741"
+              aria-label="Call us at 089 25 74 741"
               className="flex items-center gap-2 px-3 py-2 text-slate-400 hover:text-white rounded-full font-medium text-sm transition-colors focus-visible:outline-none"
             >
               <LuPhone
@@ -187,7 +187,7 @@ export default function Header() {
                 aria-hidden="true"
                 className="text-handy-orange"
               />
-              <span>+1 234 567 890</span>
+              <span>089 25 74 741</span>
             </Link>
 
             <Link
@@ -276,12 +276,12 @@ export default function Header() {
             {/* FIX 2: Added `mt-auto` to naturally push the buttons to the bottom of the screen */}
             <div className="mt-20 flex flex-col gap-3 border-t border-slate-900 pt-6">
               <Link
-                href="tel:+1234567890"
+                href="tel:089 25 74 741"
                 onClick={() => setMenuOpen(false)}
                 className="flex justify-center items-center gap-2 p-5 text-slate-300 border border-slate-800 bg-slate-900/30 rounded-xl text-sm font-medium"
               >
                 <LuPhone size={16} className="text-handy-orange" />
-                <span>+1 234 567 890</span>
+                <span>089 25 74 741</span>
               </Link>
               <Link
                 href="/contact"

@@ -132,10 +132,10 @@ export default function ContactPage() {
                   Phone Number
                 </h3>
                 <a
-                  href="tel:+353000000000"
+                  href="tel:089 25 74 741"
                   className="text-white text-lg font-medium hover:text-handy-orange transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-handy-orange rounded-sm"
                 >
-                  +353 00 000 0000
+                  089 25 74 741
                 </a>
               </div>
             </div>

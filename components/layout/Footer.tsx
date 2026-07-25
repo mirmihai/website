@@ -99,13 +99,13 @@ export default function Footer() {
               <span>ouremail@example.com</span>
             </a>
             <a
-              href="tel:+1234567"
+              href="tel:089 25 74 741"
               className="flex items-center gap-4 hover:text-white transition-colors group"
             >
               <div className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 group-hover:border-handy-orange transition-colors">
                 <LuPhone className="text-handy-orange shrink-0" size={18} />
               </div>
-              <span>+1 234 567</span>
+              <span>089 25 74 741</span>
             </a>
             <div className="flex items-center gap-4">
               <div className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 mt-1">

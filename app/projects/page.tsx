@@ -65,14 +65,6 @@ const projectsData = [
       "/assets/projects/studio/studio-47.jpg",
     ],
   },
-  {
-    id: "",
-    title: "",
-    location: "",
-    description: "",
-    services: [],
-    images: [],
-  },
 ];
 
 const ProjectGallery = ({
