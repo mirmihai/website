@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   LuHardHat,
   LuClock,
@@ -12,6 +9,7 @@ import {
   LuHammer,
   LuKey,
 } from "react-icons/lu";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // Data outside component for stability
 const processSteps = [
@@ -74,11 +72,7 @@ export default function AboutPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-handy-orange opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <ScrollReveal>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tighter mb-6 leading-tight">
               Driven by results.
             </h1>
@@ -87,7 +81,7 @@ export default function AboutPage() {
               and maintenance services across Ireland. Our team of professionals
               delivers quality results for every project.
             </p>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -111,54 +105,51 @@ export default function AboutPage() {
 
           <div className="flex flex-col gap-24 md:gap-32">
             {processSteps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className={`flex flex-col lg:items-center ${
-                  idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                } gap-12 lg:gap-20 relative`}
-              >
-                {/* Giant Background Number */}
+              <ScrollReveal key={idx}>
                 <div
-                  className={`absolute top-0 md:-top-10 text-[12rem] md:text-[18rem] font-black text-slate-800/20 leading-none select-none pointer-events-none -z-10 ${
-                    idx % 2 === 0
-                      ? "left-0 lg:-left-12"
-                      : "right-0 lg:-right-12"
-                  }`}
+                  className={`flex flex-col lg:items-center ${
+                    idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } gap-12 lg:gap-20 relative`}
                 >
-                  {step.stepNumber}
-                </div>
-
-                {/* Text Side */}
-                <div className="w-full lg:w-1/2 flex flex-col pt-8 md:pt-0 z-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="p-4 bg-slate-950 rounded-2xl border border-slate-700 shadow-xl text-handy-orange">
-                      <step.Icon size={32} aria-hidden="true" />
-                    </div>
-                    <h3 className="text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
-                      {step.title}
-                    </h3>
+                  {/* Giant Background Number */}
+                  <div
+                    className={`absolute top-0 md:-top-10 text-[12rem] md:text-[18rem] font-black text-slate-800/20 leading-none select-none pointer-events-none -z-10 ${
+                      idx % 2 === 0
+                        ? "left-0 lg:-left-12"
+                        : "right-0 lg:-right-12"
+                    }`}
+                  >
+                    {step.stepNumber}
                   </div>
-                  <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-light">
-                    {step.desc}
-                  </p>
-                </div>
 
-                {/* Image Side */}
-                <div className="w-full lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[500px] rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl group">
-                  <Image
-                    src={step.img}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    alt={`TotalBuild Construction Process - ${step.title}`}
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/80 via-transparent to-transparent opacity-80 pointer-events-none" />
+                  {/* Text Side */}
+                  <div className="w-full lg:w-1/2 flex flex-col pt-8 md:pt-0 z-10">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-4 bg-slate-950 rounded-2xl border border-slate-700 shadow-xl text-handy-orange">
+                        <step.Icon size={32} aria-hidden="true" />
+                      </div>
+                      <h3 className="text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-light">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Image Side */}
+                  <div className="w-full lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[500px] rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl group">
+                    <Image
+                      src={step.img}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      alt={`TotalBuild Construction Process - ${step.title}`}
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/80 via-transparent to-transparent opacity-80 pointer-events-none" />
+                  </div>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -170,11 +161,7 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-handy-orange opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
+          <ScrollReveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
               Ready to break ground on <br className="hidden sm:block" />
               <span className="text-handy-orange">your next project?</span>
@@ -198,7 +185,7 @@ export default function AboutPage() {
                 View Contact Info
               </Link>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
     </main>

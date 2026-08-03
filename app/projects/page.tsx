@@ -1,28 +1,10 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-  PanInfo,
-} from "framer-motion";
-import {
-  LuMapPin,
-  LuCheck,
-  LuArrowUp,
-  LuCamera,
-  LuFolderOpen,
-  LuChevronLeft,
-  LuChevronRight,
-} from "react-icons/lu";
-
+import { LuMapPin, LuCheck, LuCamera, LuFolderOpen } from "react-icons/lu";
 import HandymanDivider from "@/components/ui/HandymanDivider";
+import ProjectGallery from "@/components/ProjectGallery";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
-// --- DATA: MOVED OUTSIDE COMPONENT FOR TURBOPACK STABILITY ---
+// Data remains on the server
 const projectsData = [
   {
     id: "rathmines-studio",
@@ -35,7 +17,7 @@ const projectsData = [
       "Utilities & Systems: Full electrical and plumbing integration.",
       "Custom Carpentry: Design and installation of a seating area and table tailored to the studio's layout, maximizing the available space.",
       "Interior Finishes: Premium floor and shower tiling, alongside immaculate painting throughout the unit.",
-      " Final Fit-Out: Seamless installation of appliances, delivering a move-in-ready space.",
+      "Final Fit-Out: Seamless installation of appliances, delivering a move-in-ready space.",
     ],
     images: [
       "/assets/projects/studio/studio-1.jpg",
@@ -67,338 +49,126 @@ const projectsData = [
   },
 ];
 
-const ProjectGallery = ({
-  images,
-  title,
-}: {
-  images: string[];
-  title: string;
-}) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Navigation Handlers
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  // Framer Motion Drag Handler for Mobile Swipe
-  const handleDragEnd = (
-    event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo,
-  ) => {
-    const swipeThreshold = 50;
-    if (info.offset.x < -swipeThreshold) {
-      handleNext();
-    } else if (info.offset.x > swipeThreshold) {
-      handlePrev();
-    }
-  };
-
-  // Keyboard Accessibility Handler
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      handleNext();
-    }
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      handlePrev();
-    }
-  };
-
-  // Thumbnail Sliding Window Logic
-  const maxVisibleThumbs = 5;
-  let startIdx = Math.max(0, activeIndex - Math.floor(maxVisibleThumbs / 2));
-  let endIdx = startIdx + maxVisibleThumbs;
-
-  if (endIdx > images.length) {
-    startIdx = Math.max(0, images.length - maxVisibleThumbs);
-    endIdx = images.length;
-  }
-
-  const visibleThumbnails = images
-    .map((src, index) => ({ src, originalIndex: index }))
-    .slice(startIdx, endIdx);
-
-  return (
-    <div
-      className="w-full lg:w-2/3 flex flex-col gap-4 sm:gap-6 lg:self-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-handy-orange rounded-2xl transition-all"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      role="region"
-      aria-roledescription="carousel"
-      aria-label={`${title} image gallery`}
-    >
-      {/* Featured Main Image Container */}
-      <div className="flex items-center justify-center gap-0 sm:gap-6 w-full relative">
-        {/* Left Arrow */}
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="hidden sm:flex flex-shrink-0 z-20 p-3 rounded-full bg-slate-900 hover:bg-handy-orange text-white transition-all border border-slate-700 hover:border-handy-orange shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:ring-handy-orange"
-          aria-controls="gallery-image-wrapper"
-          aria-label="Previous image"
-        >
-          <LuChevronLeft size={28} />
-        </button>
-
-        {/* Image Frame */}
-        <div
-          id="gallery-image-wrapper"
-          className="relative w-full sm:flex-1 aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 touch-pan-y group"
-          aria-roledescription="slide"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }} // Slightly sped up for snappier mobile swiping
-              className="absolute inset-0 cursor-grab active:cursor-grabbing"
-              drag="x"
-              dragDirectionLock // Keeps swipes perfectly horizontal
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={handleDragEnd}
-            >
-              <Image
-                src={images[activeIndex]}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 50vw"
-                alt={`${title} - Image ${activeIndex + 1} of ${images.length}`}
-                className="object-cover sm:object-contain transition-all duration-300 pointer-events-none"
-                priority
-              />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-transparent to-slate-950/60 pointer-events-none" />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Screen Reader Live Region - Announces slide changes automatically */}
-          <div
-            aria-live="polite"
-            aria-atomic="true"
-            className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 bg-slate-950/80 backdrop-blur-sm px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-slate-300 border border-slate-800 pointer-events-none"
-          >
-            {activeIndex + 1} / {images.length}
-          </div>
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          type="button"
-          onClick={handleNext}
-          className="hidden sm:flex flex-shrink-0 z-20 p-3 rounded-full bg-slate-900 hover:bg-handy-orange text-white transition-all border border-slate-700 hover:border-handy-orange shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:ring-handy-orange"
-          aria-controls="gallery-image-wrapper"
-          aria-label="Next image"
-        >
-          <LuChevronRight size={28} />
-        </button>
-      </div>
-
-      {/* Thumbnail Navigation Strip */}
-      <div
-        className="flex justify-center gap-2 sm:gap-4 w-full max-w-3xl mx-auto h-20 sm:h-28 mt-2"
-        role="tablist"
-        aria-label="Thumbnail navigation"
-      >
-        {visibleThumbnails.map(({ src, originalIndex }) => (
-          <button
-            key={originalIndex}
-            type="button"
-            role="tab"
-            aria-selected={activeIndex === originalIndex}
-            aria-controls="gallery-image-wrapper"
-            onClick={() => setActiveIndex(originalIndex)}
-            // Changed from flex-1 to a fixed max-width fraction so small amounts of images don't stretch
-            className={`relative w-[18%] sm:w-[15%] max-w-[120px] rounded-xl overflow-hidden border-2 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-handy-orange ${
-              activeIndex === originalIndex
-                ? "border-handy-orange opacity-100 scale-[0.98]"
-                : "border-slate-800 opacity-40 hover:opacity-100 hover:border-slate-600 mix-blend-luminosity hover:mix-blend-normal"
-            }`}
-            aria-label={`View ${title} image ${originalIndex + 1}`}
-          >
-            <Image
-              src={src}
-              fill
-              sizes="(max-width: 768px) 20vw, 15vw"
-              alt={`Thumbnail ${originalIndex + 1}`}
-              className="object-cover pointer-events-none"
-            />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 export default function ProjectsPage() {
-  const [showTopBtn, setShowTopBtn] = useState(false);
-  const { scrollY } = useScroll();
-
-  // Scroll listener for back-to-top button
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setShowTopBtn(latest > 400);
-  });
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <main className="min-h-screen bg-slate-950 text-slate-200 relative selection:bg-handy-orange selection:text-white overflow-x-hidden">
       <div className="relative min-h-screen flex flex-col">
-        {/* FIX 2: Changed h-[60vh] to min-h-[60vh] and added py-32 to allow the content to breathe on small screens */}
-        {/* === START: HERO SECTION === */}
+        {/* HERO SECTION */}
         <section className="relative min-h-[60vh] py-32 flex flex-col justify-center items-center text-white overflow-hidden px-6">
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/80 to-slate-950 -z-0" />
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative z-10 max-w-5xl text-center flex flex-col items-center gap-6 mt-12"
-          >
-            <div className="flex items-center justify-center gap-2 mb-2 text-handy-orange font-bold tracking-widest text-xs uppercase bg-orange-950/30 px-4 py-2 rounded-full border border-orange-900/50 w-fit mx-auto">
-              <LuFolderOpen size={18} />
-              <span>Our Portfolio</span>
+          {/* Wrapped Hero text in ScrollReveal */}
+          <ScrollReveal>
+            <div className="relative z-10 max-w-5xl text-center flex flex-col items-center gap-6 mt-12">
+              <div className="flex items-center justify-center gap-2 mb-2 text-handy-orange font-bold tracking-widest text-xs uppercase bg-orange-950/30 px-4 py-2 rounded-full border border-orange-900/50 w-fit mx-auto">
+                <LuFolderOpen size={18} />
+                <span>Our Portfolio</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight drop-shadow-2xl">
+                Featured <span className="text-handy-orange">Work.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl font-light">
+                Explore a selection of our recent transformations. From delicate
+                interior restorations to robust exterior weatherproofing, the
+                proof is in the details.
+              </p>
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight drop-shadow-2xl">
-              Featured <span className="text-handy-orange">Work.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl font-light">
-              Explore a selection of our recent transformations. From delicate
-              interior restorations to robust exterior weatherproofing, the
-              proof is in the details.
-            </p>
-          </motion.div>
+          </ScrollReveal>
         </section>
-        {/* === END: HERO SECTION === */}
 
-        {/* === START: PROJECTS SHOWCASE === */}
+        {/* PROJECTS SHOWCASE */}
         <section className="py-12 md:py-24 bg-slate-950">
           <div className="max-w-[100rem] mx-auto px-6 lg:px-12 flex flex-col gap-32">
             {projectsData.map((project, idx) => (
-              <motion.div
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
                 className={`flex flex-col gap-12 lg:gap-16 ${
                   idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 }`}
               >
-                {/* Text Details Side */}
+                {/* Text Details Side - Wrapped in ScrollReveal */}
                 <div className="w-full lg:w-1/3 flex flex-col justify-center">
-                  <div className="flex items-center gap-2 text-handy-orange font-bold uppercase tracking-wider text-sm mb-4">
-                    <LuMapPin size={18} aria-hidden="true" />
-                    <span>{project.location}</span>
-                  </div>
+                  <ScrollReveal>
+                    <div className="flex items-center gap-2 text-handy-orange font-bold uppercase tracking-wider text-sm mb-4">
+                      <LuMapPin size={18} aria-hidden="true" />
+                      <span>{project.location}</span>
+                    </div>
 
-                  <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                    {project.title}
-                  </h2>
+                    <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                      {project.title}
+                    </h2>
 
-                  <div className="w-16 h-1 bg-gradient-to-r from-handy-orange to-amber-500 mb-8 rounded-full" />
+                    <div className="w-16 h-1 bg-gradient-to-r from-handy-orange to-amber-500 mb-8 rounded-full" />
 
-                  <p className="text-lg text-slate-400 leading-relaxed mb-10 font-light">
-                    {project.description}
-                  </p>
+                    <p className="text-lg text-slate-400 leading-relaxed mb-10 font-light">
+                      {project.description}
+                    </p>
 
-                  <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-800 shadow-xl relative overflow-hidden">
-                    <div className="absolute -right-10 -top-10 w-32 h-32 bg-handy-orange opacity-[0.05] blur-3xl rounded-full pointer-events-none" />
-                    <h3 className="font-bold text-slate-300 mb-6 tracking-wide uppercase text-sm border-b border-slate-800 pb-3">
-                      Services Rendered:
-                    </h3>
-                    <ul className="flex flex-col gap-4">
-                      {project.services.map((item, i) => (
-                        <li key={i} className="flex items-start gap-4 group">
-                          <div className="mt-1 p-1 bg-slate-950 rounded-md border border-slate-800 group-hover:border-handy-orange transition-colors">
-                            <LuCheck
-                              className="w-4 h-4 text-handy-orange"
-                              strokeWidth={3}
-                              aria-hidden="true"
-                            />
-                          </div>
-                          <span className="text-slate-400 font-medium leading-relaxed group-hover:text-slate-200 transition-colors">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div className="bg-slate-900/50 backdrop-blur-md rounded-3xl p-8 border border-slate-800 shadow-xl relative overflow-hidden">
+                      <h3 className="font-bold text-slate-300 mb-6 tracking-wide uppercase text-sm border-b border-slate-800 pb-3">
+                        Services Rendered:
+                      </h3>
+                      <ul className="flex flex-col gap-4">
+                        {project.services.map((item, i) => (
+                          <li key={i} className="flex items-start gap-4 group">
+                            <div className="mt-1 p-1 bg-slate-950 rounded-md border border-slate-800 transition-colors">
+                              <LuCheck className="w-4 h-4 text-handy-orange" />
+                            </div>
+                            <span className="text-slate-400 font-medium leading-relaxed transition-colors">
+                              {item}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </ScrollReveal>
                 </div>
 
-                {/* INJECTED NEW INTERACTIVE GALLERY COMPONENT */}
+                {/* Client Component Gallery */}
                 <ProjectGallery images={project.images} title={project.title} />
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
-        {/* === END: PROJECTS SHOWCASE === */}
 
         <HandymanDivider />
 
-        {/* === START: BOTTOM CTA === */}
+        {/* BOTTOM CTA */}
         <section className="py-24 px-6 bg-slate-950 border-t border-slate-900">
           <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 px-8 py-16 shadow-2xl sm:px-16 md:py-24 text-center flex flex-col items-center"
-            >
-              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-handy-orange opacity-10 blur-[80px]" />
-              <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-blue-600 opacity-10 blur-[80px]" />
+            {/* Wrapped CTA box in ScrollReveal */}
+            <ScrollReveal>
+              <div className="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 px-8 py-16 shadow-2xl sm:px-16 md:py-24 text-center flex flex-col items-center">
+                <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-handy-orange opacity-10 blur-[80px]" />
+                <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-blue-600 opacity-10 blur-[80px]" />
 
-              <div className="flex items-center justify-center gap-2 mb-6 text-handy-orange font-bold tracking-widest text-xs uppercase bg-slate-950/80 px-5 py-2.5 rounded-full border border-slate-700 shadow-inner z-10">
-                <LuCamera size={18} aria-hidden="true" />
-                <span>Like what you see?</span>
+                <div className="flex items-center justify-center gap-2 mb-6 text-handy-orange font-bold tracking-widest text-xs uppercase bg-slate-950/80 px-5 py-2.5 rounded-full border border-slate-700 shadow-inner z-10">
+                  <LuCamera size={18} aria-hidden="true" />
+                  <span>Like what you see?</span>
+                </div>
+
+                <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight relative z-10">
+                  Let&apos;s build your ideal space.
+                </h2>
+                <p className="text-lg text-slate-400 mb-10 max-w-2xl leading-relaxed relative z-10 font-light">
+                  Whether you need a complete exterior overhaul or precise
+                  interior finishing, our team is ready to bring your project to
+                  life.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-5 relative z-10">
+                  <Link
+                    href="/contact"
+                    className="bg-handy-orange text-white font-extrabold text-lg px-10 py-4 rounded-full shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:shadow-[0_0_30px_rgba(234,88,12,0.6)] hover:-translate-y-1 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    Contact us
+                  </Link>
+                </div>
               </div>
-
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight relative z-10">
-                Let&apos;s build your ideal space.
-              </h2>
-              <p className="text-lg text-slate-400 mb-10 max-w-2xl leading-relaxed relative z-10 font-light">
-                Whether you need a complete exterior overhaul or precise
-                interior finishing, our team is ready to bring your project to
-                life.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-5 relative z-10">
-                <Link
-                  href="/contact"
-                  className="bg-handy-orange text-white font-extrabold text-lg px-10 py-4 rounded-full shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:shadow-[0_0_30px_rgba(234,88,12,0.6)] hover:-translate-y-1 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                >
-                  Contact us
-                </Link>
-              </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </section>
-        {/* === END: BOTTOM CTA === */}
       </div>
-
-      {/* === FLOATING BACK TO TOP BUTTON === */}
-      <AnimatePresence>
-        {showTopBtn && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            onClick={scrollToTop}
-            className="scroll-to-top fixed bottom-8 right-8 p-4 bg-handy-orange text-white rounded-full shadow-[0_0_20px_rgba(234,88,12,0.5)] hover:bg-orange-600 transition-colors z-50 flex items-center justify-center back-to-top-btn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            aria-label="Scroll back to top"
-          >
-            <LuArrowUp size={24} aria-hidden="true" />
-          </motion.button>
-        )}
-      </AnimatePresence>
     </main>
   );
 }

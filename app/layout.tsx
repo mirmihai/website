@@ -4,6 +4,7 @@ import { Sora } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import BackToTopButton from "@/components/ui/BackToTopButton";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -87,6 +88,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <BackToTopButton />
       </body>
     </html>
   );

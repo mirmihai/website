@@ -90,13 +90,13 @@ export default function Footer() {
           <address className="flex flex-col gap-6 not-italic font-light ">
             <h3 className="text-white text-xl font-bold mb-2">Get In Touch</h3>
             <a
-              href="mailto:ouremail@example.com"
+              href="mailto:info@primebuildconstruction.ie"
               className="flex items-center gap-4 hover:text-white transition-colors group"
             >
               <div className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 group-hover:border-handy-orange transition-colors">
                 <LuMail className="text-handy-orange shrink-0" size={18} />
               </div>
-              <span>ouremail@example.com</span>
+              <span>info@primebuildconstruction.ie</span>
             </a>
             <a
               href="tel:089 25 74 741"
