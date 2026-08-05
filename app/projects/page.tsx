@@ -20,7 +20,6 @@ const projectsData = [
       "Final Fit-Out: Seamless installation of appliances, delivering a move-in-ready space.",
     ],
     images: [
-      "/assets/projects/studio/studio-1.jpg",
       "/assets/projects/studio/studio-2.jpg",
       "/assets/projects/studio/studio-3.jpg",
       "/assets/projects/studio/studio-4.jpg",
@@ -31,7 +30,6 @@ const projectsData = [
       "/assets/projects/studio/studio-10.jpg",
       "/assets/projects/studio/studio-11.jpg",
       "/assets/projects/studio/studio-12.jpg",
-      "/assets/projects/studio/studio-23.jpg",
       "/assets/projects/studio/studio-24.jpg",
       "/assets/projects/studio/studio-25.jpg",
       "/assets/projects/studio/studio-34.jpg",
