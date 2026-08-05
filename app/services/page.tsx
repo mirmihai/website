@@ -199,7 +199,7 @@ export default function ServicesPage() {
                 Contact Form
               </Link>
               <a
-                href="tel:+353000000000"
+                href="tel:089 25 74 741"
                 className="flex items-center justify-center gap-3 bg-slate-800/50 backdrop-blur-md text-white font-extrabold text-lg px-10 py-4 rounded-full border border-slate-700 hover:bg-slate-800 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 <LuPhone size={24} aria-hidden="true" />
