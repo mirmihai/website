@@ -175,7 +175,7 @@ export default function Home() {
                   REQUEST A QUOTE
                 </Link>
                 <Link
-                  href="tel:+1234567890"
+                  href="tel:089 25 74 741"
                   className="inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full text-white border border-slate-700 bg-slate-900/80 backdrop-blur-md font-bold hover:bg-slate-800 transition-all text-center"
                 >
                   <LuPhone size={20} aria-hidden="true" />
