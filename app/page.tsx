@@ -457,7 +457,7 @@ export default function Home() {
                 the work you do, we want to hear from you.
               </p>
               <Link
-                href="mailto:careers@PrimeBuildConstruction.com"
+                href="mailto:info@primebuildconstruction.ie"
                 className="inline-flex justify-center items-center bg-white text-slate-950 font-extrabold text-base px-10 py-4 rounded-full hover:bg-slate-200 transition-all shadow-lg"
               >
                 Send your CV to info@primebuildconstruction.ie
