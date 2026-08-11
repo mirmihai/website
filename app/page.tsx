@@ -460,7 +460,7 @@ export default function Home() {
                 href="mailto:careers@PrimeBuildConstruction.com"
                 className="inline-flex justify-center items-center bg-white text-slate-950 font-extrabold text-base px-10 py-4 rounded-full hover:bg-slate-200 transition-all shadow-lg"
               >
-                Send your CV to ourcompany@gmail.com
+                Send your CV to info@primebuildconstruction.ie
               </Link>
             </div>
           </ScrollReveal>
