@@ -81,8 +81,9 @@ export default function Footer() {
             </Link>
 
             <p className="text-slate-400 max-w-sm mb-8 leading-relaxed font-light">
-              Your trusted local experts for home repairs, maintenance, and
-              professional painting. Precision in every detail.
+              Professional residential building services, house extensions, and
+              renovations throughout Portlaoise, Co. Laois, and surrounding
+              areas.
             </p>
           </div>
 
@@ -111,8 +112,13 @@ export default function Footer() {
               <div className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 mt-1">
                 <LuMapPin className="text-handy-orange shrink-0" size={18} />
               </div>
-              <div className="flex flex-col gap-1 text-slate-400 pt-2">
-                <span>Based in Laois</span>
+              <div className="flex flex-col gap-1 text-slate-400 mt-1.5">
+                <span className="text-white font-medium">
+                  Portlaoise & Co. Laois
+                </span>
+                <span className="text-sm">
+                  Mountmellick, Portarlington, Abbeyleix
+                </span>
               </div>
             </div>
           </address>
@@ -149,6 +155,12 @@ export default function Footer() {
                 className="hover:text-handy-orange transition-colors"
               >
                 Services
+              </Link>
+              <Link
+                href="/house-extensions-portlaoise"
+                className="hover:text-handy-orange transition-colors"
+              >
+                House Extensions
               </Link>
               <Link
                 href="/projects"

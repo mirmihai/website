@@ -15,34 +15,31 @@ const sora = Sora({
 // 1. Enhanced Metadata for SEO & Social Media
 export const metadata: Metadata = {
   title: {
-    default: "Prime Build Construction",
+    default: "House Extensions Portlaoise | Prime Build Construction",
     template: "%s | Prime Build Construction", // This automatically adds the suffix to other pages (e.g., "About | Prime Build Construction")
   },
   description:
-    "Ireland's trusted local experts for small constructions, professional home repairs, maintenance, and precision painting. Fully insured and reliable. Book your quote today!",
+    "Planning a house extension in Portlaoise or Co. Laois? Prime Build Construction manages extensions from groundwork and structural work through to final finishes. Request a quote today.",
   keywords: [
-    "Construction Ireland",
-    "Handyman Ireland",
-    "Painting Services Ireland",
-    "Home Repairs Ireland",
-    "Ireland Painting Company",
-    "Property Maintenance Ireland",
-    "Construction Ireland",
-    "Handyman Ireland",
-    "Painting Services Ireland",
-    "Home Repairs Ireland",
-    "Irelandg Painting Company",
+    "Construction Portlaois Ireland",
+    "Handyman Portlaois Ireland",
+    "Painting Services Portlaois Ireland",
+    "Home Repairs Portlaois Ireland",
+    "Property Maintenance Portlaois Ireland",
+    "Construction Portlaois Ireland",
+    "Handyman Portlaois Ireland",
+    "Home Repairs Portlaois Ireland",
     "Property Maintenance Ireland",
   ],
   authors: [{ name: "Prime Build Construction" }],
   creator: "Prime Build Construction",
-  metadataBase: new URL("https://prime-build-construction.vercel.app/"), // Replace with your actual domain later
+  metadataBase: new URL("https://www.primebuildconstruction.ie/"),
 
   // OpenGraph (How the link looks on Facebook/WhatsApp)
   openGraph: {
     type: "website",
     locale: "en_IE",
-    url: "https://prime-build-construction.vercel.app/",
+    url: "https://primebuildconstruction.ie/",
     title:
       "Prime Build Construction | Small constructions and repairs services in Ireland",
     description:

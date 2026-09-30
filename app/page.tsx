@@ -14,6 +14,7 @@ import {
   LuHammer,
   LuPaintbrush,
   LuUsers,
+  LuHardHat,
 } from "react-icons/lu";
 
 import HandymanDivider from "@/components/ui/HandymanDivider";
@@ -34,21 +35,11 @@ const portfolio = [
 
 const services = [
   {
-    iconNode: <LuHouse className="w-6 h-6 text-blue-400" aria-hidden="true" />,
-    title: "Garden Rooms & Granny Flats",
-    desc: "Expand your living space with our specialized builds, including custom garden rooms, studio apartments, and fully equipped granny flats tailored to Ireland properties.",
-    imageUrl: "/assets/garden-room.jpeg",
-    animation: {
-      rest: { scale: 1 },
-      hover: { scale: [1, 1.15, 0.95, 1.05, 1], transition: { duration: 0.5 } },
-    },
-  },
-  {
     iconNode: (
       <LuDrill className="w-6 h-6 text-emerald-700" aria-hidden="true" />
     ),
-    title: "Renovations",
-    desc: "Transform your space with our comprehensive renovation solutions. Whether you're modernizing a single room or undertaking a full-scale home refurbishment, we provide expert craftsmanship tailored to your space and style.",
+    title: "House Extensions",
+    desc: "Create the extra space your home needs with a professionally built extension. We manage the project from groundwork and structural construction through to the final interior finishes.",
     imageUrl: "/assets/maintenance.jpeg",
     animation: {
       rest: { x: 0, y: 0 },
@@ -60,11 +51,21 @@ const services = [
     },
   },
   {
+    iconNode: <LuHouse className="w-6 h-6 text-blue-400" aria-hidden="true" />,
+    title: "Granny Flats",
+    desc: "We build and convert spaces into practical, comfortable granny flats and additional living accommodation tailored to your property.",
+    imageUrl: "/assets/garden-room.jpeg",
+    animation: {
+      rest: { scale: 1 },
+      hover: { scale: [1, 1.15, 0.95, 1.05, 1], transition: { duration: 0.5 } },
+    },
+  },
+  {
     iconNode: (
       <LuWrench className="w-6 h-6 text-stone-400" aria-hidden="true" />
     ),
-    title: "Property Maintenance",
-    desc: "Keep your property in top shape with our maintenance services, covering everything from small construction jobs to general repairs for Ireland homeowners and landlords.",
+    title: "Garage Conversions",
+    desc: "Turn an unused garage into a bedroom, home office, living room, playroom or other valuable space.",
     imageUrl: "/assets/repairs.jpeg",
     animation: {
       rest: { rotate: 0 },
@@ -75,8 +76,8 @@ const services = [
     iconNode: (
       <LuHammer className="w-6 h-6 text-amber-500" aria-hidden="true" />
     ),
-    title: "Small Constructions & Structural",
-    desc: "From groundworks to final product. We handle reinforced concrete, block wall construction, and precision timber frame structures across Ireland.",
+    title: "Shed & Outbuilding Conversions",
+    desc: "We transform suitable sheds and outbuildings into practical finished spaces for residential use.",
     imageUrl: "/assets/construction-structural.jpeg",
     animation: {
       rest: { rotate: 0 },
@@ -90,8 +91,8 @@ const services = [
     iconNode: (
       <LuPaintbrush className="w-6 h-6 text-cyan-500" aria-hidden="true" />
     ),
-    title: "Interior Finishes",
-    desc: "Complete interior transformations including plasterboard installation, joint taping and skimming, painting and decorating, tiling, laminate flooring, and door/window installations.",
+    title: "Home Renovations",
+    desc: "From individual rooms to complete property renovations, we carry out structural alterations, refurbishment and finishing work.",
     imageUrl: "/assets/interior-painter.jpeg",
     animation: {
       rest: { x: 0, rotate: 0 },
@@ -99,6 +100,22 @@ const services = [
         x: [0, -5, 10],
         rotate: [0, -15, -20],
         transition: { duration: 1.5 },
+      },
+    },
+  },
+  {
+    iconNode: (
+      <LuHardHat className="w-6 h-6 text-orange-500" aria-hidden="true" />
+    ),
+    title: "General Building Works",
+    desc: "Groundworks, foundations, blockwork, structural alterations, plastering, flooring, tiling, decorating and other residential building works.",
+    imageUrl: "/assets/general-work.jpeg",
+    animation: {
+      rest: { y: 0, scale: 1 },
+      hover: {
+        y: [0, -4, 0, -2, 0],
+        scale: [1, 1.05, 1],
+        transition: { duration: 0.6 },
       },
     },
   },
@@ -119,141 +136,96 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-200 relative selection:bg-handy-orange selection:text-white pt-20">
-      {/* === HERO SECTION === */}
       <section
         className="bg-slate-950 py-20 md:py-28"
         aria-labelledby="hero-heading"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-2 bg-slate-900 px-5 py-2.5 rounded-full border border-slate-800 shadow-sm w-fit">
-                <LuMapPin
-                  className="text-handy-orange"
-                  size={16}
-                  aria-hidden="true"
-                />
-                <span className="text-slate-300 font-bold tracking-widest text-xs uppercase">
-                  Laois Based, Serving All of Ireland
-                </span>
-              </div>
-
-              <div className="relative p-24 sm:p-40 w-full max-w-5xl overflow-hidden rounded-3xl border border-slate-800 shadow-2xl inline-block isolate">
-                <Image
-                  src="/assets/company-logo-hi-vis-1.jpeg"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 80vw"
-                  alt="Prime Build Construction Ireland Background"
-                  className="object-cover opacity-80 mix-blend-luminosity"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/60 to-slate-950/90 pointer-events-none" />
-                <div className="relative z-10">
-                  <h1
-                    id="hero-heading"
-                    className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight text-white text-center"
-                  >
-                    Prime Build{" "}
-                    <span className="text-handy-orange">Construction</span>
-                  </h1>
-                </div>
-              </div>
-
-              <p className="text-base sm:text-lg text-slate-400 mb-6 leading-relaxed font-light">
-                Reliable Ireland construction company specializing in property
-                renovations. From complete home modernizations and flawless
-                interior finishes to custom granny flats and small structural
-                builds, we bring exact precision and enduring craftsmanship to
-                every space we transform.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center py-4 px-10 rounded-full text-white bg-handy-orange font-bold shadow-lg hover:bg-orange-600 transition-all text-center"
-                >
-                  REQUEST A QUOTE
-                </Link>
-                <Link
-                  href="tel:089 25 74 741"
-                  className="inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full text-white border border-slate-700 bg-slate-900/80 backdrop-blur-md font-bold hover:bg-slate-800 transition-all text-center"
-                >
-                  <LuPhone size={20} aria-hidden="true" />
-                  <span>CALL US NOW</span>
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* === ABOUT US TEASER === */}
-      <section
-        className="bg-slate-900 py-20 md:py-28"
-        aria-labelledby="about-heading"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            {/* Image Side: Added sizing wrapper */}
-            <div className="w-full lg:w-1/2">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+            {/* LEFT SIDE: Intro Text & CTAs */}
+            <div className="w-full lg:w-1/2 flex flex-col items-start text-center lg:text-left">
               <ScrollReveal>
-                <div className="w-full relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800 group">
-                  <Image
-                    src="/assets/about-us.jpeg"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                    alt="Ireland construction professionals on site"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-                </div>
-              </ScrollReveal>
-            </div>
-
-            {/* Text Side: Added sizing wrapper */}
-            <div className="w-full lg:w-1/2">
-              <ScrollReveal>
-                <div className="w-full flex flex-col items-start">
-                  <div className="flex items-center gap-2 mb-6 bg-slate-950 px-5 py-2.5 rounded-full border border-slate-800 shadow-sm w-fit">
-                    <LuShieldCheck
-                      className="text-handy-orange"
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8">
+                  <div className="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full border border-slate-800 shadow-sm">
+                    <LuMapPin
+                      className="text-handy-orange shrink-0"
                       size={16}
                       aria-hidden="true"
                     />
                     <span className="text-slate-300 font-bold tracking-widest text-xs uppercase">
-                      Health & Safety Certified
+                      Portlaoise & Co. Laois
                     </span>
                   </div>
+                </div>
 
-                  <h2
-                    id="about-heading"
-                    className="text-3xl md:text-5xl font-extrabold text-white tracking-tighter mb-6 leading-tight"
+                <h1
+                  id="hero-heading"
+                  className="text-4xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tighter mb-6 leading-tight"
+                >
+                  Complete Building Projects <br className="hidden sm:block" />
+                  <span className="text-slate-400 text-3xl sm:text-4xl lg:text-4xl">
+                    From Groundwork to Final Finish
+                  </span>
+                </h1>
+
+                <p className="text-base sm:text-lg text-slate-300 mb-6 leading-relaxed font-light">
+                  Prime Build Construction provides professional residential
+                  building services throughout Portlaoise, Co. Laois and
+                  surrounding areas. We specialise in{" "}
+                  <span className="font-bold text-white">
+                    house extensions, granny flats, garage and shed conversions,
+                    home renovations and general building works.
+                  </span>
+                </p>
+                <p className="text-base sm:text-lg text-slate-300 mb-10 leading-relaxed font-light">
+                  From foundations and structural work through to plastering,
+                  flooring, tiling, decorating and final finishes, we manage
+                  your project from start to completion.
+                </p>
+
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 w-full sm:w-auto">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center py-4 px-10 rounded-full text-white bg-handy-orange font-bold shadow-lg hover:bg-orange-600 transition-all text-center"
                   >
-                    Your Trusted Ireland Builders.
-                    <br />
-                    <span className="text-slate-400">Start to Finish.</span>
-                  </h2>
+                    REQUEST A QUOTE
+                  </Link>
+                  <Link
+                    href="tel:089 25 74 741"
+                    className="inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full text-white border border-slate-700 bg-slate-900/80 backdrop-blur-md font-bold hover:bg-slate-800 transition-all text-center"
+                  >
+                    <LuPhone size={20} aria-hidden="true" />
+                    <span>CALL US NOW</span>
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </div>
 
-                  <p className="text-base sm:text-lg text-slate-400 mb-6 leading-relaxed font-light">
-                    PrimeBuildConstruction is a growing Laois, Ireland based
-                    company built on hard work, practical experience, and a
-                    commitment to doing the right job. Our goal is to offer
-                    clients a stress-free experience by managing multiple stages
-                    of a project under one company across the greater Ireland
-                    area.
-                  </p>
-                  <p className="text-base sm:text-lg text-slate-400 mb-6 leading-relaxed font-light">
-                    We maintain core standards of high quality, consistency,
-                    attention to detail, and on-time delivery. Our skilled and
-                    expanding team brings multi-trade capability to every site.
-                  </p>
+            {/* RIGHT SIDE: Visual Branding */}
+            <div className="w-full lg:w-1/2">
+              <ScrollReveal>
+                <div className="relative w-full h-[350px] sm:h-[450px] lg:h-[600px] overflow-hidden rounded-3xl border border-slate-800 shadow-2xl flex flex-col items-center justify-center text-center isolate">
+                  <Image
+                    src="/assets/company-logo-hi-vis-1.jpeg"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    alt="Prime Build Construction Ireland Background"
+                    className="object-cover opacity-80 mix-blend-luminosity hover:scale-105 transition-transform duration-1000"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/95 via-slate-900/70 to-slate-950/40 pointer-events-none" />
+                  <div className="relative z-10 p-6">
+                    <span className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-tight text-white drop-shadow-xl">
+                      Prime Build <br />
+                      <span className="text-handy-orange">Construction</span>
+                    </span>
+                  </div>
                 </div>
               </ScrollReveal>
             </div>
           </div>
         </div>
       </section>
-
       {/* === RECENT PROJECTS GALLERY === */}
       <section
         className="bg-slate-950 py-20 md:py-28 relative overflow-hidden"
@@ -278,21 +250,26 @@ export default function Home() {
                 id="portfolio-heading"
                 className="text-3xl md:text-5xl font-extrabold text-white tracking-tighter"
               >
-                Recent{" "}
-                <span className="text-slate-400">Projects In Ireland.</span>
+                Recent <span className="text-slate-400">Projects</span>
               </h2>
+              <p>
+                Take a look at some of our recently completed extensions,
+                conversions, renovations and building projects.{" "}
+              </p>
             </div>
           </div>
 
           {/* Injected Client Component */}
-          <RecentProjectsGallery portfolio={portfolio} />
+          <Link href="/projects">
+            <RecentProjectsGallery portfolio={portfolio} />
+          </Link>
 
           <div className="mt-12 flex justify-end w-full relative z-20">
             <Link
               href="/projects"
               className="inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full text-white border border-slate-700 bg-slate-900/80 hover:bg-slate-800 transition-all font-bold shadow-lg group"
             >
-              <span>SEE MORE RECENT PROJECTS</span>
+              <span>VIEW OUR PROJECTS</span>
               <LuArrowRight
                 size={20}
                 aria-hidden="true"
@@ -303,14 +280,12 @@ export default function Home() {
         </div>
       </section>
 
-      <HandymanDivider />
-
       {/* === SERVICES SECTION === */}
       <section id="services" className="bg-slate-900 py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center flex flex-col items-center">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tighter mb-6">
-              Our Construction <span className="text-slate-400">Services.</span>
+              Our Building <span className="text-slate-400">Services.</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-handy-orange to-orange-400 rounded-full"></div>
           </div>
@@ -348,6 +323,110 @@ export default function Home() {
         </div>
       </section>
 
+      {/* === ONE CONTRACTOR SECTION === */}
+      <section className="bg-slate-950 py-20 md:py-28 relative">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <ScrollReveal>
+            <div className="flex justify-center mb-6">
+              <div className="p-4 bg-slate-900 rounded-full border border-slate-800 shadow-inner inline-flex items-center justify-center">
+                <LuUsers
+                  className="w-8 h-8 text-handy-orange"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tighter mb-8 leading-tight">
+              One Contractor From{" "}
+              <span className="text-handy-orange">Start to Finish.</span>
+            </h2>
+            <div className="space-y-6 text-base sm:text-lg text-slate-400 leading-relaxed font-light">
+              <p>
+                Managing a building project shouldn&apos;t mean dealing with
+                multiple contractors yourself.
+              </p>
+              <p>
+                Prime Build Construction manages the construction process and
+                coordinates the specialist trades required throughout the
+                project, giving you one main point of contact from the beginning
+                of the work through to completion.
+              </p>
+              <p>
+                We focus on quality workmanship, clear communication and
+                delivering a finished project that our customers can be proud
+                of.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* === SERVICE AREA SECTION === */}
+      <section className="bg-slate-900 py-20 md:py-28 relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="relative overflow-hidden rounded-3xl bg-slate-950 border border-slate-800 p-8 sm:p-16 shadow-2xl text-center flex flex-col items-center">
+              <div className="flex items-center gap-2 mb-8 bg-slate-900 px-5 py-2.5 rounded-full border border-slate-800 shadow-sm w-fit">
+                <LuMapPin
+                  className="text-handy-orange"
+                  size={16}
+                  aria-hidden="true"
+                />
+                <span className="text-slate-300 font-bold tracking-widest text-xs uppercase">
+                  Service Area
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tighter mb-6 leading-tight">
+                Building in Portlaoise and Co. Laois
+              </h2>
+              <p className="text-base sm:text-lg text-slate-400 mb-6 max-w-3xl leading-relaxed font-light">
+                Prime Build Construction is based in Co. Laois and works with
+                homeowners throughout{" "}
+                <span className="font-bold text-slate-300">
+                  Portlaoise, Mountmellick, Portarlington, Abbeyleix, Mountrath,
+                  Stradbally
+                </span>{" "}
+                and surrounding areas.
+              </p>
+              <p className="text-base sm:text-lg text-slate-400 mb-10 max-w-2xl leading-relaxed font-light">
+                If you are considering an extension, renovation, conversion or
+                another building project, contact us to discuss your plans.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex justify-center items-center bg-handy-orange text-white font-extrabold text-base px-10 py-4 rounded-full hover:bg-orange-600 transition-all shadow-lg tracking-wide"
+              >
+                GET IN TOUCH
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* === CONTACT CTA SECTION === */}
+      {/* <section className="bg-slate-900 py-20 md:py-32 relative overflow-hidden">
+        <ScrollReveal>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
+            <div className="inline-flex items-center justify-center p-5 bg-slate-950 rounded-full border border-slate-800 mb-8 shadow-inner">
+              <LuMessageSquare
+                className="w-8 h-8 text-handy-orange"
+                aria-hidden="true"
+              />
+            </div>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter mb-6">
+              Have a project in mind?
+            </h2>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center py-4 px-12 rounded-full text-white bg-handy-orange font-bold shadow-lg hover:bg-orange-600 transition-all"
+            >
+              GET IN TOUCH
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section> */}
+
+      <HandymanDivider />
+
       {/* === WHY CHOOSE US === */}
       <section className="bg-slate-950 py-20 md:py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -357,7 +436,7 @@ export default function Home() {
             </h2>
             <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
               We combine skilled labour, the right tools, and a strong work
-              ethic to deliver reliable results on every job in Ireland.
+              ethic to deliver reliable results on every job.
             </p>
           </div>
 
@@ -465,29 +544,6 @@ export default function Home() {
             </div>
           </ScrollReveal>
         </div>
-      </section>
-
-      {/* === CONTACT CTA SECTION === */}
-      <section className="bg-slate-900 py-20 md:py-32 relative overflow-hidden">
-        <ScrollReveal>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
-            <div className="inline-flex items-center justify-center p-5 bg-slate-950 rounded-full border border-slate-800 mb-8 shadow-inner">
-              <LuMessageSquare
-                className="w-8 h-8 text-handy-orange"
-                aria-hidden="true"
-              />
-            </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter mb-6">
-              Have a project in mind?
-            </h2>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center py-4 px-12 rounded-full text-white bg-handy-orange font-bold shadow-lg hover:bg-orange-600 transition-all"
-            >
-              GET IN TOUCH
-            </Link>
-          </div>
-        </ScrollReveal>
       </section>
     </main>
   );

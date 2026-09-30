@@ -54,6 +54,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services", hasDropdown: false },
+    { name: "House Extensions", path: "/house-extensions-portlaoise" },
     { name: "Recent Projects", path: "/projects" },
     { name: "About Us", path: "/about-us" },
     { name: "Contact", path: "/contact" },
